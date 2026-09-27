@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fit-plugin-cli"
+version = "0.1.1"
+authors = [
+    { name = "Akeyiii", email = "acheng0628@outlook.com" }
+]
+description = "CLI tool for FIT framework plugin development"
+readme = "fit_cli/readme.md"
+license = "MIT"
+keywords = ["fit", "cli", "plugin"]
+requires-python = ">=3.9"
+
+dependencies = [
+    "numpy>=1.25.2,<2.0.0",
+    "pyyaml>=6.0.1,<7.0.0",
+    "requests>=2.32.4,<3.0.0",
+    "tornado>=6.5.0,<7.0.0",
+]
+
+[project.scripts]
+fit_cli = "fit_cli.main:main"
+fit = "fit_cli.main:main"
+
+[tool.setuptools]
+packages = [
+    "fit_cli",
+    "fit_cli.commands",
+    "fit_cli.utils",
+]

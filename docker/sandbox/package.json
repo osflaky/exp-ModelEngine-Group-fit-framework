@@ -1,0 +1,22 @@
+{
+  "name": "fit-sandbox-cli",
+  "version": "3.7.0-SNAPSHOT",
+  "description": "AI coding sandbox CLI - manage Docker sandboxes with Git Worktree isolation",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/cli.ts",
+    "build": "esbuild src/cli.ts --bundle --platform=node --format=cjs --outfile=dist/sandbox.cjs && printf '#!/bin/bash\nexec node \"$(dirname \"$0\")/sandbox.cjs\" \"$@\"\n' > dist/sandbox && chmod +x dist/sandbox",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.10.0",
+    "commander": "^13.0.0",
+    "picocolors": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.27.3",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

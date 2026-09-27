@@ -1,0 +1,27 @@
+description = "执行完整的测试流程 (Build & Test)"
+prompt = """
+请执行完整的测试流程。
+
+脚本位置: `.agents/scripts/run-test.sh`
+
+执行以下步骤:
+
+1. **检查脚本**:
+   - 确认脚本存在且可执行 (`chmod +x .agents/scripts/run-test.sh`).
+
+2. **运行测试**:
+   - 使用 `run_shell_command` 执行脚本: `./.agents/scripts/run-test.sh`
+   - 注意: 该脚本包含清理、构建、服务启动、接口验证等步骤，耗时可能较长 (10-20分钟)。
+
+3. **监控结果**:
+   - 如果脚本失败，分析输出日志 (脚本会提示日志路径)。
+
+4. **报告**:
+   - 输出测试摘要 (成功/失败)。
+
+**下一步**:
+测试通过后，使用以下命令提交代码:
+- Claude Code / OpenCode: `/commit`
+- Gemini CLI: `/fit:commit`
+- Codex CLI: `/prompts:fit-commit`
+"""

@@ -1,0 +1,14 @@
+registry-center:
+  client:
+    service_id: 2
+    mode: "pull" # pull or push
+    pull-frequency: 60
+    registry_fitable_frequency: 15
+    registered-fitables-expire-interval: 30 #    expected expire interval used by server
+    invalid_address_ttl: 60
+  service_ids:
+    - "modelengine.fit.registry.registry-service.register-fitables"
+    - "modelengine.fit.registry.registry-service.query-fitables-addresses"
+    - "modelengine.fit.registry.registry-service.subscribe-fitables"
+    - "modelengine.fit.registry.registry-service.query-running-fitables"
+    - "modelengine.fit.heartbeat.send-heartbeat"

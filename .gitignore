@@ -1,0 +1,83 @@
+# IDEA
+.idea/
+*.iml
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# Common
+target/
+build/
+tmp/
+
+# Gemini
+.gemini-clipboard/
+
+# Claude Code local settings
+**/settings.local.json
+
+# AI Collaboration Workspace (temporary files)
+.ai-workspace/*
+!.ai-workspace/.gitkeep
+!.ai-workspace/README.md
+!.ai-workspace/tasks/.gitkeep
+!.ai-workspace/context/.gitkeep
+!.ai-workspace/logs/.gitkeep
+
+# AI Agents local settings
+.agents/*/local/
+.agents/*/cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg
+*.egg-info/
+dist/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.manifest
+*.spec
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+instance/
+.webassets-cache
+.scrapy
+docs/_build/
+.pybuilder/
+.ipynb_checkpoints
+.pytype/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pyenv

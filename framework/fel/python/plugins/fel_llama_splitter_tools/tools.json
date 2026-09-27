@@ -1,0 +1,208 @@
+{
+  "version" : "1.0.0",
+  "definitionGroups" : [ {
+    "name" : "llama_splitter_tools",
+    "summary" : "Llama文本分割工具定义组",
+    "description" : "提供多种文本分割策略的工具定义，包括句子分割和词令牌分割，用于将长文本分割成适合处理的较小块",
+    "extensions" : { },
+    "definitions" : [ {
+      "schema" : {
+        "name" : "SentenceSplitterTool",
+        "description" : "按句子分割文本，优先保持完整句子。该工具会将输入文本按照指定的分隔符和块大小进行分割，同时保持句子的完整性，避免在句子中间断开",
+        "parameters" : {
+          "type" : "object",
+          "properties" : {
+            "text" : {
+              "defaultValue" : "",
+              "description" : "待分割的文本内容",
+              "name" : "text",
+              "type" : "string",
+              "example" : "这是一段需要分割的文本。它包含多个句子。每个句子都应该保持完整。"
+            },
+            "separator" : {
+              "defaultValue" : "",
+              "description" : "用于分割文本的分隔符，通常是句号、问号、感叹号等标点符号",
+              "name" : "separator",
+              "type" : "string",
+              "example" : "。"
+            },
+            "chunk_size" : {
+              "defaultValue" : "",
+              "description" : "每个文本块的目标大小（字符数），用于控制分割后的文本块长度",
+              "name" : "chunk_size",
+              "type" : "integer",
+              "example" : "100"
+            },
+            "chunk_overlap_size" : {
+              "defaultValue" : "",
+              "description" : "相邻文本块之间的重叠大小（字符数），用于保持上下文连贯性",
+              "name" : "chunk_overlap_size",
+              "type" : "integer",
+              "example" : "20"
+            }
+          },
+          "required" : [ "text", "separator", "chunk_size", "chunk_overlap_size" ]
+        },
+        "order" : [ "text", "separator", "chunk_size", "chunk_overlap_size" ],
+        "return" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "convertor" : ""
+        }
+      }
+    }, {
+      "schema" : {
+        "name" : "TokenTextSplitterTool",
+        "description" : "基于词令牌分割文本。该工具使用词令牌（token）作为分割单位，确保分割后的文本块在语义上更加合理，适合用于语言模型处理",
+        "parameters" : {
+          "type" : "object",
+          "properties" : {
+            "text" : {
+              "defaultValue" : "",
+              "description" : "待分割的文本内容",
+              "name" : "text",
+              "type" : "string",
+              "example" : "这是一段需要按词令牌分割的文本内容。"
+            },
+            "separator" : {
+              "defaultValue" : "",
+              "description" : "用于分割文本的分隔符，可以是空格、标点符号等",
+              "name" : "separator",
+              "type" : "string",
+              "example" : " "
+            },
+            "chunk_size" : {
+              "defaultValue" : "",
+              "description" : "每个文本块的目标大小（词令牌数量），用于控制分割后的文本块长度",
+              "name" : "chunk_size",
+              "type" : "integer",
+              "example" : "50"
+            },
+            "chunk_overlap_size" : {
+              "defaultValue" : "",
+              "description" : "相邻文本块之间的重叠大小（词令牌数量），用于保持上下文连贯性",
+              "name" : "chunk_overlap_size",
+              "type" : "integer",
+              "example" : "10"
+            }
+          },
+          "required" : [ "text", "separator", "chunk_size", "chunk_overlap_size" ]
+        },
+        "order" : [ "text", "separator", "chunk_size", "chunk_overlap_size" ],
+        "return" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "convertor" : ""
+        }
+      }
+    } ]
+  } ],
+  "toolGroups" : [ {
+    "name" : "llama_splitter_tools_impl",
+    "summary" : "Llama文本分割工具实现组",
+    "description" : "提供多种文本分割策略的具体实现，包括句子分割和词令牌分割，为Llama模型提供高效的文本预处理能力",
+    "extensions" : { },
+    "definitionGroupName" : "llama_splitter_tools",
+    "tools" : [ {
+      "namespace" : "sentence_splitter",
+      "schema" : {
+        "name" : "SentenceSplitterTool",
+        "description" : "按句子分割文本，优先保持完整句子。该工具会将输入文本按照指定的分隔符和块大小进行分割，同时保持句子的完整性，避免在句子中间断开，确保分割后的文本块在语义上保持连贯",
+        "parameters" : {
+          "type" : "object",
+          "properties" : {
+            "text" : {
+              "name" : "text",
+              "type" : "string"
+            },
+            "separator" : {
+              "name" : "separator",
+              "type" : "string"
+            },
+            "chunk_size" : {
+              "name" : "chunk_size",
+              "type" : "integer"
+            },
+            "chunk_overlap_size" : {
+              "name" : "chunk_overlap_size",
+              "type" : "integer"
+            }
+          },
+          "required" : [ ]
+        },
+        "order" : [ "text", "separator", "chunk_size", "chunk_overlap_size" ],
+        "return" : {
+          "name" : "",
+          "description" : "返回按句子分割的文本列表，优先保持完整句子。每个文本块都尽可能保持句子的完整性，避免在句子中间断开",
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "convertor" : ""
+        }
+      },
+      "runnables" : {
+        "FIT" : {
+          "genericableId" : "llama.tools.sentence_splitter",
+          "fitableId" : "default"
+        }
+      },
+      "extensions" : {
+        "tags" : [ "Llama" ]
+      },
+      "definitionName" : "SentenceSplitterTool"
+    }, {
+      "namespace" : "token_text_splitter",
+      "schema" : {
+        "name" : "TokenTextSplitterTool",
+        "description" : "基于词令牌分割文本。该工具使用词令牌（token）作为分割单位，确保分割后的文本块在语义上更加合理，适合用于语言模型处理，能够更好地保持文本的语义完整性",
+        "parameters" : {
+          "type" : "object",
+          "properties" : {
+            "text" : {
+              "name" : "text",
+              "type" : "string"
+            },
+            "separator" : {
+              "name" : "separator",
+              "type" : "string"
+            },
+            "chunk_size" : {
+              "name" : "chunk_size",
+              "type" : "integer"
+            },
+            "chunk_overlap_size" : {
+              "name" : "chunk_overlap_size",
+              "type" : "integer"
+            }
+          },
+          "required" : [ ]
+        },
+        "order" : [ "text", "separator", "chunk_size", "chunk_overlap_size" ],
+        "return" : {
+          "name" : "",
+          "description" : "返回基于词令牌分割的文本列表。每个文本块都基于词令牌进行分割，确保在语义上更加合理，适合语言模型处理",
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "convertor" : ""
+        }
+      },
+      "runnables" : {
+        "FIT" : {
+          "genericableId" : "llama.tools.token_text_splitter",
+          "fitableId" : "default"
+        }
+      },
+      "extensions" : {
+        "tags" : [ "Llama" ]
+      },
+      "definitionName" : "TokenTextSplitterTool"
+    } ]
+  } ]
+}

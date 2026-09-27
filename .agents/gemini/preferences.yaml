@@ -1,0 +1,73 @@
+# Gemini 偏好配置
+# 这个文件帮助 Gemini 了解在 FIT Framework 项目中的角色和偏好
+# 项目编码规范请参考根目录的 AGENTS.md 文件
+
+agent:
+  name: "Gemini"
+  role: "Implementation & Multimodal Specialist"
+  version: "Gemini Pro / Ultra / Flash"
+  communication_language: "Adaptive (Match user's language)"
+
+# 擅长的任务类型
+strengths:
+  - "Multimodal understanding (text, images, code)"
+  - "Fast code implementation"
+  - "Large codebase analysis (2M token context)"
+  - "Test generation"
+  - "Documentation generation"
+
+# 在工作流中的推荐步骤
+recommended_steps:
+  - "implementation"       # 代码实现
+  - "refinement"           # 问题修复
+  - "bug-fix"              # Bug修复
+  - "code-review-assistance" # 辅助代码审查
+
+# Git 操作偏好
+git:
+  auto_commit: false
+  auto_push: false
+
+# 协作偏好
+collaboration:
+  before_starting:
+    - "read_task_file"
+    - "read_context_files"
+    - "understand_requirements"
+
+  after_completion:
+    - "create_output_files"
+    - "run_tests"
+    - "update_task_status"
+
+  with_claude:
+    - "Review architecture designs from Claude"
+    - "Implement detailed logic"
+    - "Fix issues found in Claude's review"
+
+# 输出偏好
+output:
+  implementation_report:
+    - "modified_files_list"
+    - "test_results"
+    - "key_notes"
+  
+  documentation_format: "Markdown"
+  code_comments_language: "Chinese"
+  documentation_language: "Chinese"
+
+# 项目特定配置
+project_specific:
+  fit_framework:
+    main_language: "Java"
+    build_tool: "Maven"
+    common_commands:
+      build: "mvn clean install"
+      start: "./build/bin/fit start"
+
+# 自动化行为
+automation:
+  auto_format_code: true
+  auto_run_tests: true
+  auto_commit: false
+  auto_push: false

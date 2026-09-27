@@ -1,0 +1,9 @@
+fit:
+  beans:
+    packages:
+    - 'modelengine.fel.tool.mcp.client.support'
+
+mcp:
+  client:
+    request:
+      timeout-seconds: 300

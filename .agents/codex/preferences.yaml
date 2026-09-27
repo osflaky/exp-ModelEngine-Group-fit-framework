@@ -1,0 +1,84 @@
+# Codex (ChatGPT) 偏好配置
+# 这个文件帮助 Codex/ChatGPT 了解在 FIT Framework 项目中的角色和偏好
+# 项目编码规范请参考根目录的 AGENTS.md 文件
+
+agent:
+  name: "Codex"
+  role: "Implementation & Testing Specialist"
+  version: "ChatGPT-4 / ChatGPT-4 Turbo / O1"
+  communication_language: "Adaptive (Match user's language)"
+
+# 擅长的任务类型
+strengths:
+  - "Fast code implementation"
+  - "Unit test generation"
+  - "Code refactoring"
+  - "Bug fixing"
+  - "Documentation writing"
+  - "API design"
+
+# 在工作流中的推荐步骤
+recommended_steps:
+  - "implementation"       # 代码实现
+  - "refinement"          # 问题修复
+  - "bug-fix"             # Bug修复
+  - "refactoring-implementation"  # 重构实施
+
+# Git 操作偏好
+git:
+  auto_commit: false      # 不自动提交，等待人工确认
+  auto_push: false        # 不自动推送
+
+# 协作偏好
+collaboration:
+  # 接手任务前要做的事
+  before_starting:
+    - "read_task_file"
+    - "read_context_files"
+    - "understand_requirements"
+    - "check_workflow_step"
+
+  # 完成任务后要做的事
+  after_completion:
+    - "create_output_files"
+    - "run_tests"
+    - "update_task_status"
+    - "write_handoff_notes"
+
+  # 与其他AI的配合
+  with_claude:
+    - "Accept design decisions from Claude"
+    - "Focus on implementation quality"
+    - "Prepare detailed info for Claude's review"
+    - "Address Claude's review comments promptly"
+
+# 输出偏好
+output:
+  implementation_report:
+    - "modified_files_list"
+    - "key_implementation_notes"
+    - "test_results"
+    - "review_checklist"
+    - "known_issues"
+  
+  documentation_format: "Markdown"
+  code_comments_language: "Chinese"
+  documentation_language: "Chinese"
+
+# 项目特定配置
+project_specific:
+  fit_framework:
+    main_language: "Java"
+    build_tool: "Maven"
+    
+    common_commands:
+      build: "mvn clean install"
+      test: "mvn test"
+      start: "./build/bin/fit start"
+
+# 自动化行为
+automation:
+  auto_format_code: true
+  auto_run_tests: true
+  auto_commit: false
+  auto_push: false
